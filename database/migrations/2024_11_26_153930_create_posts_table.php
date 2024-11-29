@@ -15,9 +15,11 @@ return new class extends Migration
             $table->id();
 
             $table->string('title');
+            $table->string('slug')->unique();
             $table->text('content');
             $table->string('categoria');
-
+            $table->timestamp('published_at')->nullable();
+            $table->boolean('is_active')->default(false);
             $table->timestamps();
         });
     }

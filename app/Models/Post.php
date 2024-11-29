@@ -10,8 +10,23 @@ class Post extends Model
 {
     use HasFactory;
 
-    // protected $table = 'posts';
+    // protected $fillable = [
+    //     'title',
+    //     'slug',
+    //     'categoria',
+    //     'content'
+    // ];
+    protected $guarded = [
+        'is_active',
+    ];
 
+    // protected $table = 'posts';
+    protected function casts(): array{
+        return [
+            'published_at' => 'datetime',
+            'is_active' => 'boolean'
+        ];
+    }
     protected function title():Attribute{
         return Attribute::make(
             set:function($value){
@@ -22,4 +37,7 @@ class Post extends Model
             }
         );
         }
+    public function getRouteKeyName(){
+        return 'slug';
+    }
     }

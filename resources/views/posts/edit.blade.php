@@ -11,40 +11,34 @@
                 @endforeach
             </ul>
         </div>
-    @endif 
-    <form action="{{route('posts.store')}}" method="POST">
+    @endif
+    <form action="{{route('posts.update',$post)}}" method="POST">
          @csrf
+         @method('PUT')
         <label for="title">Titulo:</label>
-        <input type="text" name="title" value="{{old('title')}}">
-
-        @error('title')
-        <p>{{$message}} </p>
-        @enderror
+        <input type="text" name="title" value="{{old('title',$post->title)}}">
 
         <br>
         <br>
 
         <label for="slug">Slug:</label>
-        <input type="text" name="slug" value="{{old('slug')}}">
-
-        {{-- {{-- @error('slug')
-        <p>{{$message}} </p>
-        @enderror --}}
+        <input type="text" name="slug" value="{{old('slug',$post->slug)}}">
 
         <br>
         <br>
+
         <label for="categoria">Categoría:</label>
-        <input type="text" name="categoria" value="{{old('categoria')}}">
+        <input type="text" name="categoria" value="{{old('categoria',$post->categoria)}}">
 
         <br>
         <br>
 
         <label for="content">Contenido:</label>
-        <textarea name="content">{{old('content')}}</textarea>
+        <textarea name="content" >{{old('content',$post->content)}}</textarea>
 
         <br>
         <br>
 
-        <button type="submit">Crear post</button>
+        <button type="submit">Actualizar post</button>
     </form>
 </x-app-layout>
